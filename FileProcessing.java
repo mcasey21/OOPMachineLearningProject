@@ -119,7 +119,9 @@ public class FileProcessing
     }
 
     // Method to make freq table
-    public List<String> frequencyTable(List<String> UserAccountAge, List<String> PaymentMethod, List<String> MerchantType, List<String> TransactionRegion, List<String> TransactionIsFraudulent) 
+    public List<String> frequencyTable(List<String> UserAccountAge, List<String> PaymentMethod,
+                                       List<String> MerchantType, List<String> TransactionRegion,
+                                       List<String> TransactionIsFraudulent) 
     {
         // Store freq table in result
         List<String> result = new ArrayList<>();
@@ -131,7 +133,8 @@ public class FileProcessing
         for (int i = 0; i < SIZE; i++)
         {
             // Create a key for the current row excluding label
-            String rowKey = UserAccountAge.get(i) + "," + PaymentMethod.get(i) + "," + MerchantType.get(i) + "," + TransactionRegion.get(i);
+            String rowKey = UserAccountAge.get(i) + "," + PaymentMethod.get(i) + "," + MerchantType.get(i)
+                            + "," + TransactionRegion.get(i);
             
             // Skip if row has already been visited
             if (processedRows.contains(rowKey))
@@ -155,7 +158,10 @@ public class FileProcessing
             // Check all rows for duplicates of tempArr
             for (int j = 0; j < SIZE; j++)
             {
-                if (UserAccountAge.get(j).equals(tempArr.get(0)) && PaymentMethod.get(j).equals(tempArr.get(1)) && MerchantType.get(j).equals(tempArr.get(2)) && TransactionRegion.get(j).equals(tempArr.get(3)))
+                if (UserAccountAge.get(j).equals(tempArr.get(0))
+                    && PaymentMethod.get(j).equals(tempArr.get(1))
+                    && MerchantType.get(j).equals(tempArr.get(2))
+                    && TransactionRegion.get(j).equals(tempArr.get(3)))
                 {
                     String label = TransactionIsFraudulent.get(j);
                     if (label.equalsIgnoreCase("yes"))
@@ -170,7 +176,8 @@ public class FileProcessing
             }// End inside loop
             
             // Store the result in the list
-            String output = tempArr + "\tYes Count: " + yesCount + "\tNo Count: " + noCount;
+            String output = String.format("%-50s %10d %10d", 
+            String.join(", ", tempArr), yesCount, noCount);
             result.add(output);
 
         }// End outside loop

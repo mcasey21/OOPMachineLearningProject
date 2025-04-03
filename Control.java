@@ -24,8 +24,8 @@ public class Control
                                                    TransactionIsFraudulent);
 
         // Printing the frequency table
-        System.out.println("\t\t FEATURES \t\t\t\t   LABEL");
-        System.out.println("\t\t\t\t\t\t\tYES\tNO");
+        System.out.println("\t\t FEATURES \t\t\t\t\tLABEL");
+        System.out.println("\t\t\t\t\t\t\t  YES\t      NO");
         for (String row : freqTable)
         {
             System.out.println(row);
