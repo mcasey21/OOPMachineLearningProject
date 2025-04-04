@@ -184,6 +184,28 @@ public class FileProcessing
         return result;
     }// End method
 
+    // This method gets the probability of a value appearing in a column in terms of 1
+    // e.g appears 100 out of 200 times = 50% = 0.5
+    public float probability(List<String> column, String featValue) 
+    {
+        // Set count to 0
+        int count = 0;
+        int rows = column.size();
+
+        // Search for value in column
+        for (String item : column) 
+        {
+            // Increment if found
+            if (item.equalsIgnoreCase(featValue))
+            { 
+                count++;
+            }
+        }
+
+        // Cast count as float to get float division and not int division
+        return (float)count/rows;    
+    }
+
     // Getters to retrieve the ArrayLists
     public ArrayList<String> getUserAccountAge() {
         return UserAccountAge;

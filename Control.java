@@ -30,5 +30,10 @@ public class Control
         {
             System.out.println(row);
         }
+
+        System.out.println("\n\n");
+
+        System.out.println("P(New) " + fp.probability(UserAccountAge, "New"));
+        System.out.println("P(Old) " + fp.probability(UserAccountAge, "Old"));
     }
 }
