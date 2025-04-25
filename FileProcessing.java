@@ -119,92 +119,77 @@ public class FileProcessing
     }
 
     // Method to make freq table
-    public List<String> frequencyTable(List<String> UserAccountAge, List<String> PaymentMethod,
-                                       List<String> MerchantType, List<String> TransactionRegion,
-                                       List<String> TransactionIsFraudulent) 
+    public void frequencyTable(String outputFileName, List<String> UserAccountAge, List<String> PaymentMethod,
+                                       List<String> MerchantType, List<String> TransactionRegion, List<String> TransactionIsFraudulent) 
     {
-        // Store freq table in result
-        List<String> result = new ArrayList<>();
         // Flag to check rows that have been visited, Set for no dupes
         Set<String> processedRows = new HashSet<>();
         // Size for the loops to avoid out of bounds
         int SIZE = UserAccountAge.size();
-        
-        for (int i = 0; i < SIZE; i++)
-        {
-            // Create a key for the current row excluding label
-            String rowKey = UserAccountAge.get(i) + "," + PaymentMethod.get(i) + "," + MerchantType.get(i)
-                            + "," + TransactionRegion.get(i);
-            
-            // Skip if row has already been visited
-            if (processedRows.contains(rowKey))
-            {
-                continue;
-            }
-            
-            // Mark this combination as processed
-            processedRows.add(rowKey);
-            
-            // Create a temporary array that represents the features of this row
-            List<String> tempArr = new ArrayList<>();
-            tempArr.add(UserAccountAge.get(i));
-            tempArr.add(PaymentMethod.get(i));
-            tempArr.add(MerchantType.get(i));
-            tempArr.add(TransactionRegion.get(i));
-            
-            // Create counts for label
-            int yesCount = 0, noCount = 0;
-            
-            // Check all rows for duplicates of tempArr
-            for (int j = 0; j < SIZE; j++)
-            {
-                if (UserAccountAge.get(j).equals(tempArr.get(0))
-                    && PaymentMethod.get(j).equals(tempArr.get(1))
-                    && MerchantType.get(j).equals(tempArr.get(2))
-                    && TransactionRegion.get(j).equals(tempArr.get(3)))
-                {
-                    String label = TransactionIsFraudulent.get(j);
-                    if (label.equalsIgnoreCase("yes"))
-                    {
-                        yesCount++;
-                    } 
-                    else if (label.equalsIgnoreCase("no"))
-                    {
-                        noCount++;
-                    }
-                }
-            }// End inside loop
-            
-            // Store the result in the list
-            String output = String.format("%-50s %10d %10d", 
-            String.join(", ", tempArr), yesCount, noCount);
-            result.add(output);
 
-        }// End outside loop
-        return result;
+        // Try to write to CSV
+        try (FileWriter fw = new FileWriter(outputFileName)) 
+        {
+            // Add header row
+            fw.write("UserAccountAge,PaymentMethod,MerchantType,TransactionRegion,YesCount,NoCount\n");
+
+            
+            for (int i = 0; i < SIZE; i++)
+            {
+                // Create a key for the current row excluding label
+                String rowKey = UserAccountAge.get(i) + "," + PaymentMethod.get(i) + "," + MerchantType.get(i)
+                                + "," + TransactionRegion.get(i);
+                
+                // Skip if row has already been visited
+                if (processedRows.contains(rowKey))
+                {
+                    continue;
+                }
+                
+                // Mark this combination as processed
+                processedRows.add(rowKey);
+                
+                // Create a temporary array that represents the features of this row
+                List<String> tempArr = new ArrayList<>();
+                tempArr.add(UserAccountAge.get(i));
+                tempArr.add(PaymentMethod.get(i));
+                tempArr.add(MerchantType.get(i));
+                tempArr.add(TransactionRegion.get(i));
+                
+                // Create counts for label
+                int yesCount = 0, noCount = 0;
+                
+                // Check all rows for duplicates of tempArr
+                for (int j = 0; j < SIZE; j++)
+                {
+                    if (UserAccountAge.get(j).equals(tempArr.get(0))
+                        && PaymentMethod.get(j).equals(tempArr.get(1))
+                        && MerchantType.get(j).equals(tempArr.get(2))
+                        && TransactionRegion.get(j).equals(tempArr.get(3)))
+                    {
+                        String label = TransactionIsFraudulent.get(j);
+                        if (label.equalsIgnoreCase("yes"))
+                        {
+                            yesCount++;
+                        } 
+                        else if (label.equalsIgnoreCase("no"))
+                        {
+                            noCount++;
+                        }
+                    }
+                }// End inside loop
+
+                // Write the frequency info to CSV
+                fw.write(String.join(",", tempArr) + "," + yesCount + "," + noCount + "\n");
+
+            }// End outside loop
+        } 
+        catch (IOException e) 
+        {
+            System.out.println("Error writing frequency table: " + e.getMessage());
+        }
     }// End method
 
-    // This method gets the probability of a value appearing in a column in terms of 1
-    // e.g appears 100 out of 200 times = 50% = 0.5
-    public float probability(List<String> column, String featValue) 
-    {
-        // Set count to 0
-        int count = 0;
-        int rows = column.size();
-
-        // Search for value in column
-        for (String item : column) 
-        {
-            // Increment if found
-            if (item.equalsIgnoreCase(featValue))
-            { 
-                count++;
-            }
-        }
-
-        // Cast count as float to get float division and not int division
-        return (float)count/rows;    
-    }
 
     // Getters to retrieve the ArrayLists
     public ArrayList<String> getUserAccountAge() {
