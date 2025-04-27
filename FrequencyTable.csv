@@ -1,5 +1,5 @@
 UserAccountAge,PaymentMethod,MerchantType,TransactionRegion,YesCount,NoCount
-New,CreditCard,Retail,Domestic,8,4
+New,CreditCard,Retail,Domestic,7,4
 New,CreditCard,Retail,International,10,8
 New,CreditCard,DigitalService,Domestic,6,17
 New,CreditCard,DigitalService,International,5,6
@@ -10,7 +10,7 @@ New,BankTransfer,DigitalService,International,2,6
 Old,CreditCard,Retail,Domestic,6,6
 Old,CreditCard,Retail,International,5,6
 Old,CreditCard,DigitalService,Domestic,4,4
-Old,CreditCard,DigitalService,International,3,11
+Old,CreditCard,DigitalService,International,1,11
 Old,BankTransfer,Retail,Domestic,8,5
 Old,BankTransfer,Retail,International,8,5
 Old,BankTransfer,DigitalService,Domestic,5,5

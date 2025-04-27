@@ -26,7 +26,8 @@ public class FileProcessing
 	public FileProcessing (String fileName)
 	{
 		this.fileName = fileName;
-        fileExample = new File(fileName);	
+        fileExample = new File(fileName);
+        //setFileName(fileName);
 	}
 
     // Read file into an ArrayList
@@ -210,5 +211,10 @@ public class FileProcessing
 
     public ArrayList<String> getTransactionIsFraudulent() {
         return TransactionIsFraudulent;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+        this.fileExample = new File(fileName); // Update file object too
     }
 }

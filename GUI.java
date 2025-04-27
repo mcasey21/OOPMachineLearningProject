@@ -12,7 +12,7 @@ import java.util.List;
 import javax.swing.*;
 
 public class GUI extends JFrame implements ActionListener{
-    JPanel leftPanel, row1, row2, row3, row4, row5, row6;
+    JPanel leftPanel, row1, row2, row3, row4, row5;
     JButton showTable, addRow, predict;
     JComboBox<String> f1ComboBox, f2ComboBox, f3ComboBox, f4ComboBox;
     JLabel l1, l2, l3, l4;
@@ -309,17 +309,17 @@ public class GUI extends JFrame implements ActionListener{
                         // Determine which count is higher
                         if (yesCount > noCount)
                         {
-                            outputArea.setText("Prediction: Transaction IS fraudulent\n" +
+                            outputArea.setText("Prediction: Transaction IS fraudulent\n\n" +
                                             "Yes count: " + yesCount + ", No count: " + noCount);
                         } 
                         else if (noCount > yesCount)
                         {
-                            outputArea.setText("Prediction: Transaction IS NOT fraudulent\n" +
+                            outputArea.setText("Prediction: Transaction IS NOT fraudulent\n\n" +
                                             "Yes count: " + yesCount + ", No count: " + noCount);
                         }
                         else
                         {
-                            outputArea.setText("Prediction: Undetermined\n" +
+                            outputArea.setText("Prediction: Undetermined\n\n" +
                                             "Yes count: " + yesCount + ", No count: " + noCount);
                         }
                     } // End if
