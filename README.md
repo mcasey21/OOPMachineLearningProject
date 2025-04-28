@@ -59,4 +59,7 @@ based on the occurrences of combinations of features and their fraud labels.
 ### Link to video
 https://youtu.be/DrBQhHED1hY
 
-    
+### If I had more time
+- I would have went on to complete level 4 of the brief.
+- I wouldve made a nicer GUI.
+- I couldve made more error handling/better code.
